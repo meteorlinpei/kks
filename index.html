@@ -1,0 +1,1139 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<script type="text/javascript">
+//屏幕自适应
+(function (doc, win) {
+    var docEl = doc.documentElement,
+    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+    recalc = function () {
+	    var clientWidth = docEl.clientWidth;
+        if (!clientWidth) return;
+        if(clientWidth>=640){
+	        docEl.style.fontSize = '100px';
+        }else{
+            docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+        }
+    };
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);
+</script>
+<title>快快算练习</title>
+<meta name="keywords" content="快快算">
+<meta name="description" content="快快算">
+<style type="text/css">
+*{padding:0rem; margin:0rem;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color:transparent;width:100%;height:100%;}
+/*超出部分显示...*/
+li{list-style:none; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;word-break:keep-all;}
+ul{list-style:none;}
+img{ border:none; display:block;}
+a{color:#222222;overflow: hidden;text-decoration:none;}
+a:hover{ text-decoration:none;color:#e60012;}
+/*超出部分隐藏*/
+div{overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align:left;}
+select{background-color:transparent; border-color:transparent;-webkit-appearance: none;}
+input[type=button]{-webkit-appearance:none;outline:none;border:none;}
+input[type=radio]{-webkit-appearance:none;outline:none;border:none;}
+.radio{width:0.15rem;height: 0.15rem;-webkit-appearance: none;background:#ffffff;  border-radius: 50%;
+  border: 0.02rem solid #aaaaaa;position: relative; margin-right:0.1rem;display:inline-block;margin-top:0.15rem;}
+input[type="radio"]:checked{	
+		position: absolute;
+width: 0.09rem;
+  height: 0.09rem;
+  border-radius: 50%;
+   background-color:#1B9AF7;
+  		top: 0.03rem;
+		left: 0.03rem;
+}
+label{height:0.3rem;line-height:0.3rem;}
+.select {
+		display: inline-block;
+		width: 3rem;
+		position: relative;
+		vertical-align: middle;
+		padding: 0;
+		overflow: hidden;
+		background-color: #fff;
+		color: #222222;
+		border: 0.01rem solid #aaa;
+		text-shadow: none;
+		border-radius: 0.04rem;	
+		transition: box-shadow 0.25s ease;
+		z-index: 2;
+		height:0.4rem;
+		margin-top:0.06rem;
+	}
+ 
+	.select:hover {
+		box-shadow: 0 0.01rem 0.04rem rgba(0, 0, 0, 0.15);
+	}
+ 
+	.select:before {
+		content: "";
+		position: absolute;
+		width: 0;
+		height: 0;
+		border: 0.1rem solid transparent;
+		border-top-color: #1B9AF7;
+		top: 0.15rem;
+		right: 0.1rem;
+		cursor: pointer;
+		z-index: -2;
+	}
+	.select select {
+		cursor: pointer;
+		padding:0rem 0.1rem 0rem 0.1rem;
+		width: 100%;
+		border: none;
+		background: transparent;
+		background-image: none;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		font-size:0.2rem;
+	}
+ 
+	.select select:focus {
+		outline: none;
+	}
+.button{border-radius:0.04rem;background-color:#1B9AF7;border:0rem;color:#ffffff;width:2.5rem;height:0.6rem;font-size:0.2rem;cursor:pointer;}
+.button:active{ background-color:#0880d7;}
+
+.button_j{border-radius:0.04rem;background-color:#e59501;border:0rem;color:#ffffff;width:2.5rem;height:0.6rem;font-size:0.2rem;cursor:pointer;}
+.button_j:active{ background-color:#ca8402;}
+
+.button_hong{border-radius:0.04rem;background-color:#f44336;border:0rem;color:#ffffff;width:2.5rem;height:0.6rem;font-size:0.2rem;cursor:pointer;}
+.button_hong:active{ background-color:#c92216;}
+
+.button_hui{border-radius:0.04rem;background-color:#e7e7e7;border:0rem;color:#555555;width:2.5rem;height:0.6rem;font-size:0.2rem;cursor:pointer;}
+.button_hui:active{ background-color:#b7b3b3;}
+
+.button_h{border-radius:0.04rem;background-color:#e7e7e7;border:0rem;color:#555555;width:1.9rem;height:0.65rem;font-size:0.5rem;cursor:pointer;}
+.button_h:active{ background-color:#888888;color:#ffffff;}
+
+/*强制换行word-break: break-all;word-wrap:break-word;*/
+html{height:100%;width:100%;font-size:100px;}
+@media screen and (min-width: 640px){body{background:#ffffff !important;}}
+body{font-family: 'Microsoft YaHei','微软雅黑',Helvetica,Arial,sans-serif,STHeiti;color:#222222; font-size:0.16rem; font-weight:normal;background:#ffffff;height:100%;width:100%;-webkit-text-size-adjust: none;}
+.container{width:6.4rem;margin:0 auto; background:#ffffff;height:100%;overflow:visible;position:relative;}
+.container .header{width:6.4rem;height:0.6rem; text-align:center;font-size:0.3rem;line-height:0.6rem; font-weight:bold; color:#ffffff; background-color:#e60012;position:relative;}
+.container .header .fh{width:0rem;height:0rem;position:absolute;color:#ffffff;top:0.15rem;left:0rem;cursor: pointer;border: 0.15rem solid transparent;border-right-color: #ffffff;}
+.container .header .tj{width:0rem;height:0rem;position:absolute;color:#ffffff;top:0.15rem;right:0.15rem;cursor: pointer;border: 0.15rem solid transparent;border-right-color: #ffffff;border-left-color: #ffffff;border-top-color: #ffffff;border-bottom-color: #ffffff;}
+.container .nrbox{width:6.4rem;height:auto; font-size:0.2rem;}
+.container .nrbox .ll{width:2.0rem;height:0.5rem;float:left; text-align:right; line-height:0.5rem;margin-top:0.3rem;}
+.container .nrbox .lc{width:0.4rem;height:0.5rem;float:left;margin-top:0.3rem;}
+.container .nrbox .lr{width:4.0rem;height:0.5rem;float:left;margin-top:0.3rem;}
+.container .nrbox .zh{width:6.4rem;height:0.6rem;float:left;margin-top:0.5rem; text-align:center;}
+
+.container .kksjs{width:6.1rem;height:1.66rem; font-size:1rem; font-weight:bold;margin-left:0.2rem;}
+.container .kksjs .shuzi{width:1.36rem;height:1.36rem;float:left; text-align:center; line-height:1.4rem;margin-top:0.2rem;}
+.container .kksjs .shuzicurr{width:1.36rem;height:1.36rem;float:left; text-align:center; line-height:1.4rem;margin-top:0.2rem;border:0.02rem #989898 solid;border-radius:0.03rem;}
+.container .kksjs .fuhao{width:0.93rem;height:1.36rem;float:left; text-align:center; line-height:1.4rem;margin-top:0.2rem;}
+.container .kksjs .jieguo{width:1.36rem;height:1.36rem;float:left; text-align:center; line-height:1.4rem; border:0.02rem #989898 solid;margin-top:0.2rem;border-radius:0.03rem;}
+.container .kksjs .jieguocurr{width:1.36rem;height:1.36rem;float:left; text-align:center; line-height:1.4rem; border:0.02rem #008CBA solid;margin-top:0.2rem;border-radius:0.03rem;}
+.container .kksjs .cuowu{width:1.36rem;height:1.36rem;float:left; text-align:center; line-height:1.4rem; border:0.02rem #f44336 solid;margin-top:0.2rem;border-radius:0.03rem;}
+.container .anniu{width:3.2rem;height:0.6rem;float:left; text-align:center; margin-top:0.4rem;}
+
+.container .kksfj{width:6.1rem;height:1.02rem;margin-left:0.2rem;}
+.container .kksfj .fjbox{width:1.48rem;height:1.02rem;float:left;}
+.container .kksfj .fjbox .con1{width:1.48rem;height:0.37rem;}
+.container .kksfj .fjbox .con1 .xian{width:0.3rem;height:0.3rem;float:left;  margin-left:0.27rem;position:relative;background-color:transparent;}
+.container .kksfj .fjbox .con1 .xian:before{position:absolute;top:0rem;right:0rem;left:0rem;bottom:0rem;border-bottom:0.28rem #989898 solid;border-left:0.28rem solid transparent;content:"";}
+.container .kksfj .fjbox .con1 .xian:after{position:absolute;left:0.01rem;right:0rem;top:0.01rem;bottom:0rem;border-bottom:0.31rem #ffffff solid;border-left:0.31rem solid transparent;content:"";}
+.container .kksfj .fjbox .con1 .xian1{width:0.3rem;height:0.3rem;float:left;  margin-left:0.27rem;position:relative;background-color:transparent;}
+.container .kksfj .fjbox .con1 .xian1:before{position:absolute;top:0rem;right:0rem;left:0rem;bottom:0rem;border-bottom:0.31rem #989898 solid;border-right:0.33rem solid transparent;content:"";}
+.container .kksfj .fjbox .con1 .xian1:after{position:absolute;left:0rem;right:0.01rem;top:0.01rem;bottom:0rem;border-bottom:0.26rem #ffffff solid;border-right:0.28rem solid transparent;content:"";}
+.container .kksfj .fjbox .con2{width:1.48rem;height:0.64rem;}
+.container .kksfj .fjbox .con2 .con2box{width:1.68rem;height:0.64rem;}
+.container .kksfj .fjbox .con2 .con2box .jieguo{width:0.6rem;height:0.6rem;border:0.02rem #989898 solid;margin-right:0.2rem;float:left;line-height:0.6rem;text-align:center; font-size:0.6rem;font-weight:bold;border-radius:0.03rem;}
+.container .kksfj .fjbox .con2 .con2box .jieguocurr{width:0.6rem;height:0.6rem;border:0.02rem #008CBA solid;margin-right:0.2rem;float:left;line-height:0.6rem;text-align:center; font-size:0.6rem;font-weight:bold;border-radius:0.03rem;}
+.container .kksfj .fjbox .con2 .con2box .cuowu{width:0.6rem;height:0.6rem;border:0.02rem #f44336 solid;margin-right:0.2rem;float:left;line-height:0.6rem;text-align:center; font-size:0.6rem;font-weight:bold;border-radius:0.03rem;}
+.container .kksfj .csr{float:left;width:1.5rem;height:1.02rem;}
+.container .kksfj .csr .csrcon1{width:1.35rem;height:0.7rem;border-bottom:0.02rem #989898 solid;border-right:0.02rem #989898 solid;margin-left:0.13rem; color:#008CBA;line-height:1.05rem;text-align:center; font-size:0.3rem; font-weight:bold;}
+.container .kksfj .csr .csrcon2{height:0.29rem;width:0.8rem;border-right:0.02rem #008CBA solid; font-size:0.3rem;font-weight:bold; text-align:right;line-height:0.35rem; color:#008CBA;}
+.container .kksfj .csl{float:left;width:2.25rem;height:1.02rem;}
+.container .kksfj .csl .cslcon1{width:1.35rem;height:0.7rem;border-bottom:0.02rem #989898 solid;border-left:0.02rem #989898 solid;margin-right:0.13rem; color:#008CBA;line-height:1.05rem;text-align:center; font-size:0.3rem; font-weight:bold; margin-left:0.75rem;}
+.container .kksfj .csl .cslcon2{height:0.29rem;width:0.8rem;border-left:0.02rem #008CBA solid; margin-left:1.45rem;font-size:0.3rem;font-weight:bold; text-align:left;line-height:0.35rem; color:#008CBA;}
+
+.container .kksfjd{width:1.95rem;height:0.15rem;border-bottom:0.02rem #008CBA solid;border-left:0.02rem #008CBA solid;border-right:0.02rem #008CBA solid;margin-top:-0.01rem; margin-left:1.65rem;}
+.container .kksfjd1{width:1.95rem;height:0.15rem;border-bottom:0.02rem #008CBA solid;border-left:0.02rem #008CBA solid;border-right:0.02rem #008CBA solid;margin-top:-0.01rem; margin-left:0.51rem;}
+
+.container .cjbox{width:6.4rem;height:1.3rem; background-color:#F6F6F6; color:#808080;}
+.container .cjbox .ll{width:4.8rem;height:1.3rem;float:left;margin-left:0.2rem;}
+.container .cjbox .ll .con1{width:4.8rem;height:0.35rem; line-height:0.35rem;font-size:0.2rem;}
+.container .cjbox .ll .con2{width:4.8rem;height:0.95rem;line-height:0.95rem; text-align:center;font-size:0.6rem; font-weight:bold; color:#989898;}
+.container .cjbox .lr{width:1.2rem;height:1.2rem;float:left;margin-right:0.2rem; font-size:0.18rem;margin-top:0.05rem;}
+.container .cjbox .lr .lcon{width:0.6rem;height:0.3rem;float:left; line-height:0.3rem;}
+.container .cjbox .lr .rcon{width:0.6rem;height:0.3rem;float:left; line-height:0.3rem;}
+
+.container .cjbox2{width:6.4rem;height:1.5rem; background-color:#F6F6F6; color:#808080; margin-bottom:0.2rem;}
+.container .cjbox2 .ll{width:6rem;height:1.5rem;float:left;margin-left:0.2rem;}
+.container .cjbox2 .ll .con1{width:6rem;height:0.37rem; line-height:0.37rem;font-size:0.2rem;}
+.container .cjbox2 .ll .con2{width:6rem;height:1rem;line-height:1rem; text-align:center;font-size:0.6rem; font-weight:bold; color:#989898;}
+
+.container .jianpan{position:absolute;bottom:0;width:6.3rem;height:3.4rem; margin-left:0.05rem;}
+.container .jianpan .jian{width:1.9rem;height:0.65rem; float:left;margin:0.1rem;}
+
+.container .tjbox{width:6.4rem;height:auto; font-size:0.4rem; font-weight:bold;margin-bottom:1rem;}
+.container .tjbox .ll{width:3rem;height:0.6rem;float:left; text-align:right; line-height:0.6rem;margin-top:0.3rem;}
+.container .tjbox .lc{width:0.4rem;height:0.6rem;float:left;margin-top:0.3rem;}
+.container .tjbox .lr{width:3rem;height:0.6rem;float:left;margin-top:0.3rem; line-height:0.6rem;}
+
+.container .btnbox{width:6.4rem;height:1rem;}
+.container .xqlist{width:6rem;margin-left:0.2rem;height:auto;font-size:0.65rem;line-height:1rem; font-weight:bold;}
+.container .xqlist em{color:#f44336;font-style:normal;}
+.container .xqlist i{color:#4CAF50;font-style:normal;}
+.container .xqlist b{color:#008CBA;font-style:normal;}
+
+</style>
+</head>
+<body>
+<!--首页-->
+<div class="container" id="kkssy">
+	<div class="header">快快算练习</div>
+	<div class="nrbox">
+		<div class="ll">练习题目：</div><div class="lc"></div>
+			<div class="lr">
+			<div class="select">
+				<select id="cslx">
+					<option value="0">10以内加法</option>
+					<option value="1">10以内减法</option>
+					<option value="2">10以内加减法</option>
+					<option value="9">10以内加减法填空</option>
+					<option value="7">凑10加法</option>
+					<option value="8">破10减法</option>
+					<option value="3">20以内加法</option>
+					<option value="4">20以内减法</option>
+					<option value="5">20以内加减法</option>
+					<option value="6">20以内综合加减法</option>
+					<option value="10">20以内加减法填空</option>
+					<option value="11">20以内综合加减法填空</option>
+				</select>
+			</div>
+			</div>
+		<div class="ll">练习类型：</div><div class="lc"></div>
+			<div class="lr">
+				<label><div class="radio"><input id="csjs" type="radio" checked="checked" name="csff" value="0" /></div>计时(5分钟)</label>
+				<label style="margin-left:0.5rem;"><div class="radio"><input id="cslx" type="radio" name="csff" value="1" /></div>练习</label>
+			</div>
+		<div class="ll">声音效果：</div><div class="lc"></div>
+			<div class="lr">
+				<label><div class="radio"><input id="kaiqi" type="radio" checked="checked" name="syxg" value="0" /></div>开启</label>
+				<label style="margin-left:0.5rem;"><div class="radio"><input id="jingyin" type="radio" name="syxg" value="1" /></div>静音</label>
+			</div>			
+		<div class="zh">
+			<input type="button" class="button" value="开 始" ontouchstart="" onclick="btn_ks()">
+		</div>
+	</div>
+</div>
+<!--首页-->
+<!--测试-->
+<div class="container" id="kkscs" style="display:none;">
+	<div class="header"><a href=”javascript:void(0);” class="fh" onclick="gohome();return false;"> </a>快快算练习<a href=”javascript:void(0);” class="tj" onclick="gotongji();return false;"> </a></div>
+	<div class="cjbox">
+		<div class="ll">
+			<div class="con1" id="jstm">练习题目：</div>
+			<div class="con2" id="djs">练 习</div>
+		</div>
+		<div class="lr">
+			<div class="lcon" style="color:#008CBA;">总数：</div><div class="rcon" style="color:#008CBA;" id="ht_zs">0</div>
+			<div class="lcon" style="color:#e59501;">跳过：</div><div class="rcon" style="color:#e59501;" id="ht_tg">0</div>
+			<div class="lcon" style="color:#4CAF50;">正确：</div><div class="rcon" style="color:#4CAF50;" id="ht_zq">0</div>
+			<div class="lcon" style="color:#f44336;">错误：</div><div class="rcon" style="color:#f44336;" id="ht_cw">0</div>
+		</div>
+	</div>
+	<!--计算部分-->
+	<div class="kksjs">
+		<div class="shuzi" id="ht_js_y">0</div><div class="fuhao" id="ht_js_fh">+</div><div class="shuzi" id="ht_js_e">0</div><div class="fuhao">=</div><div class="shuzi" id="ht_js_jg"></div>
+	</div>
+	<!--分解部分-->
+	<div class="kksfj" style="display:none;" id="kksfj">
+		<div class="csl" id="kksfj_l" style="display:none;"><div class="cslcon1">10</div><div class="cslcon2" id="kksfjj">+</div></div>
+		<div class="fjbox">
+			<div class="con1"><div class="xian"></div><div class="xian1"></div></div>
+			<div class="con2"><div class="con2box"><div class="jieguocurr" id="kksfj_sl">0</div><div class="jieguo" id="kksfj_sr">0</div></div></div>
+		</div>
+		<div class="csr" id="kksfj_r" style="display:none;"><div class="csrcon1">10</div><div class="csrcon2" id="kksfjj1">+</div></div>
+	</div>
+	<div class="kksfjd" style="display:none;" id="kksfjd"></div>
+	<!--按钮-->
+	<div class="anniu"><input type="button" class="button_j" value="跳 过" ontouchstart="" onclick="btn_skip()"></div>
+	<div class="anniu"><input type="button" class="button" value="下 题" ontouchstart="" onclick="btn_wc()"></div>
+	<!--键盘-->
+	<div class="jianpan">
+		<div class="jian"><input type="button" class="button_h" ontouchstart="" value="1" onclick="btn_jian(1)"></div><div class="jian"><input type="button" class="button_h" ontouchstart="" value="2" onclick="btn_jian(2)"></div><div class="jian"><input type="button" class="button_h" ontouchstart="" value="3" onclick="btn_jian(3)"></div>
+		<div class="jian"><input type="button" class="button_h" ontouchstart="" value="4" onclick="btn_jian(4)"></div><div class="jian"><input type="button" class="button_h" ontouchstart="" value="5" onclick="btn_jian(5)"></div><div class="jian"><input type="button" class="button_h" ontouchstart="" value="6" onclick="btn_jian(6)"></div>
+		<div class="jian"><input type="button" class="button_h" ontouchstart="" value="7" onclick="btn_jian(7)"></div><div class="jian"><input type="button" class="button_h" ontouchstart="" value="8" onclick="btn_jian(8)"></div><div class="jian"><input type="button" class="button_h" ontouchstart="" value="9" onclick="btn_jian(9)"></div>	
+		<div class="jian"><input type="button" class="button_h" ontouchstart="" value="X" onclick="btn_jian(10)"></div><div class="jian"><input type="button" class="button_h" ontouchstart="" value="0" onclick="btn_jian(0)"></div><div class="jian"><input type="button" class="button_h" ontouchstart="" value="<" onclick="btn_jian(11)"></div>	
+	</div>
+</div>
+<!--测试-->
+<!--统计结果-->
+<div class="container" id="kkstj" style="display:none;">
+	<div class="header"><a href=”javascript:void(0);” class="fh" onclick="gohome();return false;"> </a>快快算练习</div>
+	<div class="cjbox2">
+		<div class="ll">
+			<div class="con1" id="jstm2">练习题目：</div>
+			<div class="con2">测试完成</div>
+		</div>
+	</div>
+	<!--结果-->
+	<div class="tjbox">
+		<div style="color:#008CBA;" class="ll">总数：</div><div class="lc"></div><div class="lr" style="color:#008CBA;" id="ht_tj_zs">0</div>
+		<div style="color:#e59501;" class="ll">跳过：</div><div class="lc"></div><div class="lr" style="color:#e59501;" id="ht_tj_tg">0</div>
+		<div style="color:#4CAF50;" class="ll">正确：</div><div class="lc"></div><div class="lr" style="color:#4CAF50;" id="ht_tj_zq">0</div>
+		<div style="color:#f44336;" class="ll">错误：</div><div class="lc"></div><div class="lr" style="color:#f44336;" id="ht_tj_cw">0</div>
+	</div>
+	<div class="anniu"><input type="button" class="button_j" value="查看详情" ontouchstart="" onclick="btn_xiangqing()"></div>
+	<div class="anniu"><input type="button" class="button" value="返回首页" ontouchstart="" onclick="gohome()"></div>
+</div>
+<!--统计结果-->
+<!--详情-->
+<div class="container" id="kksxq" style="display:none;">
+	<div class="header"><a href=”javascript:void(0);” class="fh" onclick="gohome();return false;"> </a>快快算练习</div>
+	<div class="cjbox2">
+		<div class="ll">
+			<div class="con1" id="jstm3">练习题目：</div>
+			<div class="con2">测试详情</div>
+		</div>
+	</div>
+	<div class="btnbox">
+		<div class="anniu"><input type="button" id="button_xq_tg" class="button_j" value="跳过题目" ontouchstart="" onclick="btn_xq_tg()"></div>
+		<div class="anniu"><input type="button" id="button_xq_cw" class="button_hui" value="错误题目" ontouchstart="" onclick="btn_xq_cw()"></div>
+	</div>
+	<!--列表-->
+	<div class="xqlist" id="xqlist"> </div>	
+</div>
+<!--详情-->
+
+<script type="text/javascript">
+var ht_tm,ht_lx,ht_sy;
+var timer;
+var list_tg='';
+var list_cw='';
+var inputobj;	//输入框的id
+//开始
+function btn_ks(){
+	//初始化
+	list_tg='';
+	list_cw='';
+	document.getElementById('ht_js_jg').className = 'shuzi';
+	document.getElementById('ht_js_jg').innerText='';
+	document.getElementById('ht_js_y').className = 'shuzi';
+	document.getElementById('ht_js_y').innerText='';
+	document.getElementById('ht_js_e').className = 'shuzi';
+	document.getElementById('ht_js_e').innerText='';	
+	document.getElementById("ht_zs").innerText='0';
+	document.getElementById("ht_tg").innerText='0';
+	document.getElementById("ht_zq").innerText='0';
+	document.getElementById("ht_cw").innerText='0';
+	//初始化分解
+	document.getElementById("kksfj").style.display="none";
+	document.getElementById('kksfj_sl').className = 'jieguo';
+	document.getElementById('kksfj_sl').innerText='';
+	document.getElementById('kksfj_sr').className = 'jieguo';
+	document.getElementById('kksfj_sr').innerText='';	
+	document.getElementById("kksfjd").style.display="none";
+	
+	//获取题目
+	var myselect=document.getElementById("cslx");
+	var index=myselect.selectedIndex;
+	ht_tm=myselect.options[index].value;
+	//获取类型
+	var radios = document.getElementsByName("csff");
+    for(var i=0;i<radios.length;i++){
+    	if(radios[i].checked == true){
+    	    ht_lx = radios[i].value;
+    	    break;
+        }
+    }
+	//获取声音
+	var radios2 = document.getElementsByName("syxg");
+    for(var i=0;i<radios2.length;i++){
+    	if(radios2[i].checked == true){
+    	    ht_sy = radios2[i].value;
+    	    break;
+        }
+    }    
+	//设置标题		
+	document.getElementById("jstm").innerText='练习题目：' + myselect.options[index].text;
+	document.getElementById("jstm2").innerText=document.getElementById("jstm").innerText;
+	document.getElementById("jstm3").innerText=document.getElementById("jstm").innerText;
+	//判断类型计时还是练习
+	if (ht_lx=='0'){
+		//计时
+		document.getElementById("djs").innerText='5分00秒';
+		maxtime = 5 * 60 - 1;
+		timer = setInterval("CountDown()", 1000);
+	}
+	else{
+		//练习
+		document.getElementById("djs").innerText='练 习';
+	}    
+	//切换页面
+	if (ht_tm=='7' || ht_tm=='8'){
+		//凑10和破10
+		//输入框不能确定
+		inputobj='';
+		//显示分解框
+		document.getElementById("kksfj").style.display="";
+		document.getElementById("kksfjd").style.display="";
+		//随机题
+		random_cs();
+	}
+	else if (ht_tm=='9' || ht_tm=='10' || ht_tm=='11'){
+		//10和20填空
+		//输入框不能确定
+		inputobj='';
+		//随机题
+		random_tk();
+	}
+	else if (parseInt(ht_tm)>=0 && parseInt(ht_tm)<=6){
+		//10-20加减法
+		//确定输入框
+		inputobj='ht_js_jg';
+		//初始化
+		document.getElementById(inputobj).className = 'jieguocurr';
+		document.getElementById(inputobj).innerText='';
+		//随机题
+		random_kks('-1');
+	}
+	else{
+		alert('请选择练习题目!');
+	}
+	//切换
+	document.getElementById("kkscs").style.display="";
+	document.getElementById("kkssy").style.display="none";
+}
+//倒计时
+var maxtime = 5 * 60;
+function CountDown() {
+	if (maxtime >= 0) {
+	    minutes = Math.floor(maxtime / 60);
+        seconds = Math.floor(maxtime % 60);
+        var ts=seconds;
+        if (seconds<10){ts='0' + seconds}
+        document.getElementById("djs").innerText = minutes + "分" + ts + "秒";
+	    --maxtime;
+    } else{
+	    clearInterval(timer);
+	    //播放声音
+		if (ht_sy=='0'){
+			document.getElementById('yp_wc').load();
+			document.getElementById('yp_wc').play();
+		}
+	    //计时时间到
+	    tongji();
+    }
+}
+//返回首页
+function gohome(){
+	if (ht_lx=='0'){
+		//停止计时
+		clearInterval(timer);
+	}
+	//数据清零
+	document.getElementById("ht_zs").innerText='0';
+	document.getElementById("ht_tg").innerText='0';
+	document.getElementById("ht_zq").innerText='0';
+	document.getElementById("ht_cw").innerText='0';
+	//切换
+	document.getElementById("kkssy").style.display="";
+	document.getElementById("kkscs").style.display="none";
+	document.getElementById("kkstj").style.display="none";
+	document.getElementById("kksxq").style.display="none";
+}
+//统计
+function gotongji(){
+	if (ht_lx=='0'){
+		//停止计时
+		clearInterval(timer);
+	}
+	tongji();
+}
+//统计结果
+function tongji(){
+	//统计数据
+	document.getElementById('ht_tj_zs').innerText=document.getElementById('ht_zs').innerText;
+	document.getElementById('ht_tj_tg').innerText=document.getElementById('ht_tg').innerText;
+	document.getElementById('ht_tj_zq').innerText=document.getElementById('ht_zq').innerText;
+	document.getElementById('ht_tj_cw').innerText=document.getElementById('ht_cw').innerText;
+	//切换
+	document.getElementById("kkstj").style.display="";
+	document.getElementById("kkscs").style.display="none";
+	document.getElementById("kkssy").style.display="none";
+	document.getElementById("kksxq").style.display="none";
+}
+//详情
+function btn_xiangqing(){
+	//生成跳过数据
+	btn_xq_tg();
+	//切换
+	document.getElementById("kksxq").style.display="";
+	document.getElementById("kkscs").style.display="none";
+	document.getElementById("kkssy").style.display="none";
+	document.getElementById("kkstj").style.display="none";
+}
+//详情跳过数据
+function btn_xq_tg(){
+	//生成详情数据
+	document.getElementById('xqlist').innerText='无';
+	var strs = new Array();
+	strs = list_tg.split(";");
+	var tmp='';
+	for (i=0; i<strs.length; i++ ){
+		if (strs[i]!=''){
+			tmp=tmp + strs[i] + '<br>';
+		}
+	}
+	document.getElementById('xqlist').innerHTML=tmp;
+	//设置按钮
+	document.getElementById('button_xq_tg').className = 'button_j';
+	document.getElementById('button_xq_cw').className = 'button_hui';
+}
+//详情错误数据
+function btn_xq_cw(){
+	//生成详情数据
+	document.getElementById('xqlist').innerText='';
+	var strs = new Array();
+	strs = list_cw.split(";");
+	var tmp='';
+	for (i=0; i<strs.length; i++ ){
+		if (strs[i]!=''){
+			tmp=tmp + strs[i] + '<br>';
+		}
+	}
+	document.getElementById('xqlist').innerHTML=tmp;
+	//设置按钮
+	document.getElementById('button_xq_cw').className = 'button_hong';
+	document.getElementById('button_xq_tg').className = 'button_hui';
+}
+//按数字键
+function btn_jian(num){
+	//播放声音
+	if (ht_sy=='0'){
+		document.getElementById('yp_an').load();
+		document.getElementById('yp_an').play();
+	}
+	//输入框颜色初始化
+	document.getElementById(inputobj).className = 'jieguocurr';
+	//判断是否可以输入，最多输入2个数字
+	var t=document.getElementById(inputobj).innerText;
+	if (num>=0 && num<=9){
+		//输入0-9
+		if (inputobj=='kksfj_sl' || inputobj=='kksfj_sr'){
+			//分解输入
+			document.getElementById(inputobj).innerText=num.toString();
+			//自动切换到下一个输入框
+			var tmpobj='';
+			if (parseInt(document.getElementById('ht_js_y').innerText)>=parseInt(document.getElementById('ht_js_e').innerText)){
+				//前面数字大，输入顺序l,r,上面计算结果
+				if (inputobj=='kksfj_sl'){
+					//当前输入左边，切换到右边
+					tmpobj='kksfj_sr';
+				}
+				else{
+					//当前输入右边，切换到计算结果
+					tmpobj='ht_js_jg';
+				}				
+			}
+			else{
+				//后面数字大，输入顺序r,l,上面计算结果
+				if (inputobj=='kksfj_sr'){
+					tmpobj='kksfj_sl';
+				}
+				else{
+					tmpobj='ht_js_jg';
+				}
+			}
+			//设置当前输入框
+			document.getElementById(inputobj).className = 'jieguo';
+			document.getElementById(tmpobj).className = 'jieguocurr';
+			inputobj=tmpobj;
+		}
+		else{
+			//计算公式输入
+			if (t.length<2){
+				t=t + num.toString();
+				document.getElementById(inputobj).innerText=t;
+			}
+			else{
+				//不能大于2位数字
+				document.getElementById(inputobj).className = 'cuowu';
+			}			
+		}	
+	}
+	else if (num=='10'){
+		//全部删除
+		document.getElementById(inputobj).innerText='';
+	}
+	else if (num=='11'){
+		//删除一个
+		if (inputobj=='kksfj_sl' || inputobj=='kksfj_sr'){
+			//分解部分
+			if (document.getElementById(inputobj).innerText!=''){
+				//有数字删除
+				document.getElementById(inputobj).innerText='';
+			}
+			else{
+				//没有数字跳转到上个输入框
+				var tmpobj='';
+				if (parseInt(document.getElementById('ht_js_y').innerText)>=parseInt(document.getElementById('ht_js_e').innerText)){
+					//前面数字大，输入顺序l,r
+					if (inputobj=='kksfj_sr'){
+						//当前输入左边，切换到右边
+						tmpobj='kksfj_sl';
+					}				
+				}
+				else{
+					//后面数字大，输入顺序r,l
+					if (inputobj=='kksfj_sl'){
+						tmpobj='kksfj_sr';
+					}
+				}
+				//设置当前输入框
+				document.getElementById(inputobj).className = 'jieguo';
+				document.getElementById(tmpobj).className = 'jieguocurr';
+				inputobj=tmpobj;			
+			}
+		}
+		else{
+			if (ht_tm=='7' || ht_tm=='8'){
+				//凑10和破10
+				if (document.getElementById(inputobj).innerText!=''){
+					//有数字删除一个数字
+					t=t.substring(0,t.length-1);
+					document.getElementById(inputobj).innerText=t;	
+				}
+				else{
+					//没有数字跳转到上个输入框
+					var tmpobj='';
+					if (parseInt(document.getElementById('ht_js_y').innerText)>=parseInt(document.getElementById('ht_js_e').innerText)){
+						tmpobj='kksfj_sr';
+					}
+					else{
+						tmpobj='kksfj_sl';
+					}
+					//设置当前输入框
+					document.getElementById(inputobj).className = 'jieguo';
+					document.getElementById(tmpobj).className = 'jieguocurr';
+					inputobj=tmpobj;	
+
+				}
+			}
+			else{
+				//其它题
+				t=t.substring(0,t.length-1);
+				document.getElementById(inputobj).innerText=t;			
+			}		
+		}	
+	}
+}
+//凑十破十随机题
+function random_cs(){
+	//初始化
+	document.getElementById('ht_js_y').className = 'shuzi';
+	document.getElementById('ht_js_e').className = 'shuzi';
+	document.getElementById('kksfj_sl').innerText='';
+	document.getElementById('kksfj_sr').innerText='';
+	if (ht_tm=='7'){
+		//凑10+
+		document.getElementById('kksfjj').innerText='+';
+		document.getElementById('kksfjj1').innerText='+';
+		document.getElementById('ht_js_fh').innerText='+';
+		var y=getRndInteger(2,9);	//取第一位数
+		document.getElementById('ht_js_y').innerText=y;
+		var x=getRndInteger((11-y),9);	//取第二位数
+		document.getElementById('ht_js_e').innerText=x;	//填入结果空
+		//判断数字大小，小的做分解
+		if (y>=x){
+			//第一位分解
+			document.getElementById("kksfj_l").style.display="";
+			document.getElementById("kksfj_r").style.display="none";
+			document.getElementById('kksfjd').className = 'kksfjd';
+			document.getElementById('ht_js_e').className = 'shuzicurr';
+			inputobj='kksfj_sl';	//第一位分解输入
+			document.getElementById('kksfj_sl').className = 'jieguocurr';
+		}
+		else{
+			//第二位分解
+			document.getElementById("kksfj_r").style.display="";
+			document.getElementById("kksfj_l").style.display="none";
+			document.getElementById('kksfjd').className = 'kksfjd1';
+			document.getElementById('ht_js_y').className = 'shuzicurr';
+			inputobj='kksfj_sr';	//第二位分解输入
+			document.getElementById('kksfj_sr').className = 'jieguocurr';
+		}
+	}
+	else{
+		//破10-
+		document.getElementById('kksfjj').innerText='-';
+		document.getElementById('kksfjj1').innerText='-';		
+		document.getElementById('ht_js_fh').innerText='-';
+		var y=getRndInteger(11,18);	//取第一位数
+		document.getElementById('ht_js_y').innerText=y;
+		var x=getRndInteger((y-9),9);	//取第二位数
+		document.getElementById('ht_js_e').innerText=x;	//填入结果空
+		//分解第二位
+		document.getElementById("kksfj_l").style.display="";
+		document.getElementById("kksfj_r").style.display="none";
+		document.getElementById('kksfjd').className = 'kksfjd';
+		document.getElementById('ht_js_e').className = 'shuzicurr';
+		inputobj='kksfj_sl';	//第二位分解输入
+		document.getElementById('kksfj_sl').className = 'jieguocurr';
+	}
+	//清空结果
+	document.getElementById('ht_js_jg').innerText='';
+	document.getElementById('ht_js_jg').className = 'jieguo';
+}
+//填空随机题
+function random_tk(){
+	var ws=getRndInteger(0,1);	//随机哪位填空
+	var tmpobj;	//用于填入数字
+	if (ws==0){
+		inputobj='ht_js_y';	//第一位
+		tmpobj='ht_js_e';
+	}
+	else{
+		inputobj='ht_js_e';	//第二位
+		tmpobj='ht_js_y';
+	}
+	var f=getRndInteger(0,1);	//0为+，1为-
+	if (f==0){
+		//+
+		document.getElementById('ht_js_fh').innerText='+';
+		if (ht_tm=='9'){
+			//10内填空
+			var y=getRndInteger(1,9);	//取数
+			document.getElementById(tmpobj).innerText=y;
+			document.getElementById('ht_js_jg').innerText=getRndInteger((y+1),10);	//填入结果空
+		}
+		else if (ht_tm=='11'){
+			//20内综合填空
+			var y=getRndInteger(1,19);	//取数
+			document.getElementById(tmpobj).innerText=y;
+			document.getElementById('ht_js_jg').innerText=getRndInteger((y+1),20);	//填入结果空			
+		}
+		else if (ht_tm=='10'){
+			//20内填空
+			var y=getRndInteger(1,19);	//取数
+			document.getElementById(tmpobj).innerText=y;
+			var ls=0;
+			if (y<11){
+				ls=11;
+			}
+			else{
+				ls=y+1;
+			}
+			document.getElementById('ht_js_jg').innerText=getRndInteger(ls,20);	//填入结果空
+		}		
+	}
+	else{
+		//-
+		document.getElementById('ht_js_fh').innerText='-';
+		if (ht_tm=='9'){
+			//10内填空
+			var y=getRndInteger(1,10);	//取数
+			document.getElementById(tmpobj).innerText=y;
+			if (tmpobj=='ht_js_y'){
+				//第一位填空
+				document.getElementById('ht_js_jg').innerText=getRndInteger(1,y);	//填入结果空
+			}
+			else{
+				//第二位填空
+				document.getElementById('ht_js_jg').innerText=getRndInteger(0,(10-y));	//填入结果空
+			}
+		}
+		else if (ht_tm=='11'){
+			//20内综合填空
+			var y=getRndInteger(1,20);	//取数
+			document.getElementById(tmpobj).innerText=y;
+			if (tmpobj=='ht_js_y'){
+				//第一位填空
+				document.getElementById('ht_js_jg').innerText=getRndInteger(1,y);	//填入结果空
+			}
+			else{
+				//第二位填空
+				document.getElementById('ht_js_jg').innerText=getRndInteger(0,(20-y));	//填入结果空
+			}			
+		}
+		else if (ht_tm=='10'){
+			//20内填空
+			if (tmpobj=='ht_js_y'){
+				//第一位填空
+				var y=getRndInteger(11,19);	//取第一位
+				document.getElementById(tmpobj).innerText=y;
+				document.getElementById('ht_js_jg').innerText=getRndInteger((y-9),(y-1));	//填入结果空
+			}
+			else{
+				//第二位填空
+				var y=getRndInteger(1,20);	//取第一位
+				document.getElementById(tmpobj).innerText=y;
+				var ls=0;
+				if (y>=11){
+					ls=1;
+				}
+				else{
+					ls=11-y;
+				}
+				document.getElementById('ht_js_jg').innerText=getRndInteger(ls,(20-y));	//填入结果空
+			}
+		}
+	}
+	//清空结果
+	document.getElementById('ht_js_y').className = 'shuzi';	
+	document.getElementById('ht_js_e').className = 'shuzi';
+	document.getElementById('ht_js_jg').className = 'shuzi';
+	document.getElementById(inputobj).innerText='';
+	document.getElementById(inputobj).className = 'jieguocurr';	
+}
+//随机题
+function random_kks(tm_num){
+	if (tm_num=='-1'){tm_num=ht_tm}
+	if (tm_num=='0'){
+		//10以内加法
+		document.getElementById('ht_js_fh').innerText='+';
+		var y=getRndInteger(1,9);	//取第一位
+		document.getElementById('ht_js_y').innerText=y;
+		//取第二位
+		document.getElementById('ht_js_e').innerText=getRndInteger(1,(10-y));
+	}
+	else if (tm_num=='1'){
+		//10以内减法
+		document.getElementById('ht_js_fh').innerText='-';
+		var y=getRndInteger(1,10);	//取第一位
+		document.getElementById('ht_js_y').innerText=y;
+		//取第二位
+		document.getElementById('ht_js_e').innerText=getRndInteger(1,(y-1));
+	}
+	else if (tm_num=='2'){
+		//10以内加减法
+		var f=getRndInteger(0,1);	//0为+，1为-
+		if (f==0){
+			//加
+			random_kks('0');
+		}
+		else{
+			//减
+			random_kks('1');
+		}
+	}
+	else if (tm_num=='3'){
+		//20以内加法，结果都大于10
+		document.getElementById('ht_js_fh').innerText='+';
+		var y=getRndInteger(1,19);	//取第一位
+		document.getElementById('ht_js_y').innerText=y;
+		//取第二位
+		var ls=0;
+		if (y>=11){
+			ls=1;
+		}
+		else{
+			ls=11-y;
+		}
+		document.getElementById('ht_js_e').innerText=getRndInteger(ls,(20-y));
+	}
+	else if (tm_num=='4'){
+		//20以内减法
+		document.getElementById('ht_js_fh').innerText='-';
+		var y=getRndInteger(11,20);	//取第一位
+		document.getElementById('ht_js_y').innerText=y;
+		//取第二位
+		document.getElementById('ht_js_e').innerText=getRndInteger(1,(y-1));
+	}
+	else if (tm_num=='9'){
+		//20以内加减法
+		var f=getRndInteger(0,1);	//0为+，1为-
+		if (f==0){
+			//加
+			random_kks('3');
+		}
+		else{
+			//减
+			random_kks('4');
+		}
+	}
+	else if (tm_num=='6'){
+		//20内综合加减法
+		var f=getRndInteger(0,1);	//0为+，1为-
+		if (f==0){
+			//加
+			document.getElementById('ht_js_fh').innerText='+';
+			var y=getRndInteger(1,19);	//取第一位
+			document.getElementById('ht_js_y').innerText=y;
+			//取第二位
+			document.getElementById('ht_js_e').innerText=getRndInteger(1,(20-y));
+		}
+		else{
+			//减
+			document.getElementById('ht_js_fh').innerText='-';
+			var y=getRndInteger(1,20);	//取第一位
+			document.getElementById('ht_js_y').innerText=y;
+			//取第二位
+			document.getElementById('ht_js_e').innerText=getRndInteger(1,(y-1));			
+		}	
+	}
+
+	//清空结果
+	document.getElementById('ht_js_y').className = 'shuzi';	
+	document.getElementById('ht_js_e').className = 'shuzi';
+	document.getElementById('ht_js_jg').className = 'shuzi';	
+	document.getElementById('ht_js_jg').innerText='';
+	document.getElementById('ht_js_jg').className = 'jieguocurr';
+}
+//获取随机数
+function getRndInteger(min, max) {
+	//2数一样直接返回
+	if (min==max){return min;}
+	//大小错位交换顺序
+	if (min>max){
+		var t=min;
+		min=max;
+		max=t;
+	}
+	return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+//跳过
+function btn_skip(){
+	//播放声音
+	if (ht_sy=='0'){
+		document.getElementById('yp_xt').load();
+		document.getElementById('yp_xt').play();
+	}
+	//统计跳过
+	document.getElementById('ht_tg').innerText=parseInt(document.getElementById('ht_tg').innerText)+1;
+	//统计总数
+	document.getElementById('ht_zs').innerText=parseInt(document.getElementById('ht_zs').innerText)+1;
+	//生成随机题
+	if (ht_tm=='7' || ht_tm=='8'){
+		//凑10破10
+		//计算正确答案
+		var htda;
+		if (document.getElementById('ht_js_fh').innerText=='+'){
+			htda=parseInt(document.getElementById('ht_js_y').innerText) + parseInt(document.getElementById('ht_js_e').innerText);
+		}
+		else{
+			htda=parseInt(document.getElementById('ht_js_y').innerText) - parseInt(document.getElementById('ht_js_e').innerText);
+		}
+		//跳过题添加到列表
+		list_tg=list_tg + ';' + document.getElementById('ht_js_y').innerText + ' ' + document.getElementById('ht_js_fh').innerText + ' ' + document.getElementById('ht_js_e').innerText + ' = <i>' + htda + '</i>';
+		//生成新随机题
+		random_cs();
+	}
+	else if (ht_tm=='9' || ht_tm=='10' || ht_tm=='11'){
+		//10和20填空
+		//计算正确答案
+		var htda;
+		if (document.getElementById('ht_js_fh').innerText=='+'){
+			//+
+			if (inputobj=='ht_js_y'){
+				//加法第一位填空
+				htda=parseInt(document.getElementById('ht_js_jg').innerText) - parseInt(document.getElementById('ht_js_e').innerText);
+				//跳过题添加到列表
+				list_tg=list_tg + ';<i>' + htda + '</i> ' + document.getElementById('ht_js_fh').innerText + ' ' + document.getElementById('ht_js_e').innerText + ' = ' + document.getElementById('ht_js_jg').innerText;
+			}
+			else{
+				//加法第二位填空
+				htda=parseInt(document.getElementById('ht_js_jg').innerText) - parseInt(document.getElementById('ht_js_y').innerText);
+				//跳过题添加到列表
+				list_tg=list_tg + ';' + document.getElementById('ht_js_y').innerText + ' ' + document.getElementById('ht_js_fh').innerText + ' <i>' + htda + '</i> = ' + document.getElementById('ht_js_jg').innerText;
+			}
+		}		
+		else{
+			//-
+			if (inputobj=='ht_js_y'){
+				//减法第一位填空
+				htda=parseInt(document.getElementById('ht_js_jg').innerText) + parseInt(document.getElementById('ht_js_e').innerText);
+				//跳过题添加到列表
+				list_tg=list_tg + ';<i>' + htda + '</i> ' + document.getElementById('ht_js_fh').innerText + ' ' + document.getElementById('ht_js_e').innerText + ' = ' + document.getElementById('ht_js_jg').innerText;
+			}
+			else{
+				//减法第二位填空
+				htda=parseInt(document.getElementById('ht_js_y').innerText) - parseInt(document.getElementById('ht_js_jg').innerText);
+				//跳过题添加到列表
+				list_tg=list_tg + ';' + document.getElementById('ht_js_y').innerText + ' ' + document.getElementById('ht_js_fh').innerText + ' <i>' + htda + '</i> = ' + document.getElementById('ht_js_jg').innerText;
+			}
+		}	
+		//生成新随机题
+		random_tk();
+	}
+	else if (parseInt(ht_tm)>=0 && parseInt(ht_tm)<=6){
+		//10-20加减法
+		//计算正确答案
+		var htda;
+		if (document.getElementById('ht_js_fh').innerText=='+'){
+			htda=parseInt(document.getElementById('ht_js_y').innerText) + parseInt(document.getElementById('ht_js_e').innerText);
+		}
+		else{
+			htda=parseInt(document.getElementById('ht_js_y').innerText) - parseInt(document.getElementById('ht_js_e').innerText);
+		}
+		//跳过题添加到列表
+		list_tg=list_tg + ';' + document.getElementById('ht_js_y').innerText + ' ' + document.getElementById('ht_js_fh').innerText + ' ' + document.getElementById('ht_js_e').innerText + ' = <i>' + htda + '</i>';
+		//生成新随机题		
+		random_kks('-1');
+	}
+}
+//下题
+function btn_wc(){
+	//播放声音
+	if (ht_sy=='0'){
+		document.getElementById('yp_xt').load();
+		document.getElementById('yp_xt').play();
+	}
+	//判断是否输入
+	if (document.getElementById(inputobj).innerText==''){
+		document.getElementById(inputobj).className = 'cuowu';
+		return;
+	}
+	//统计总数
+	document.getElementById('ht_zs').innerText=parseInt(document.getElementById('ht_zs').innerText)+1;
+	//生成随机题
+	if (ht_tm=='7' || ht_tm=='8'){
+		//凑10破10
+		if (document.getElementById('ht_js_fh').innerText=='+'){
+			//+
+			if (parseInt(document.getElementById('ht_js_y').innerText) + parseInt(document.getElementById('ht_js_e').innerText) == parseInt(document.getElementById('ht_js_jg').innerText)){
+				//统计正确
+				document.getElementById('ht_zq').innerText=parseInt(document.getElementById('ht_zq').innerText)+1;
+			}
+			else{
+				//计算错误，添加到列表
+				//计算正确答案
+				var htda=parseInt(document.getElementById('ht_js_y').innerText) + parseInt(document.getElementById('ht_js_e').innerText);
+				//添加到错误列表
+				list_cw=list_cw + ';' + document.getElementById('ht_js_y').innerText + ' ' + document.getElementById('ht_js_fh').innerText + ' ' + document.getElementById('ht_js_e').innerText + ' = <em>' + document.getElementById('ht_js_jg').innerText + '</em> <i>[' + htda + ']</i>';
+				//统计错误
+				document.getElementById('ht_cw').innerText=parseInt(document.getElementById('ht_cw').innerText)+1;	
+			}
+		}
+		else{
+			//-
+			if (parseInt(document.getElementById('ht_js_y').innerText) - parseInt(document.getElementById('ht_js_e').innerText) == parseInt(document.getElementById('ht_js_jg').innerText)){
+				//统计正确
+				document.getElementById('ht_zq').innerText=parseInt(document.getElementById('ht_zq').innerText)+1;
+			}
+			else{
+				//计算错误，添加到列表
+				//计算正确答案
+				var htda=parseInt(document.getElementById('ht_js_y').innerText) - parseInt(document.getElementById('ht_js_e').innerText);
+				//添加到错误列表			
+				list_cw=list_cw + ';' + document.getElementById('ht_js_y').innerText + ' ' + document.getElementById('ht_js_fh').innerText + ' ' + document.getElementById('ht_js_e').innerText + ' = <em>' + document.getElementById('ht_js_jg').innerText + '</em> <i>[' + htda + ']</i>';
+				//统计错误
+				document.getElementById('ht_cw').innerText=parseInt(document.getElementById('ht_cw').innerText)+1;	
+			}	
+		}
+		//生成随机题
+		random_cs();
+	}
+	else if (ht_tm=='9' || ht_tm=='10' || ht_tm=='11'){
+		//10和20填空
+		if (document.getElementById('ht_js_fh').innerText=='+'){
+			//+
+			if (parseInt(document.getElementById('ht_js_y').innerText) + parseInt(document.getElementById('ht_js_e').innerText) == parseInt(document.getElementById('ht_js_jg').innerText)){
+				//统计正确
+				document.getElementById('ht_zq').innerText=parseInt(document.getElementById('ht_zq').innerText)+1;
+			}
+			else{
+				//计算错误，添加到列表
+				if (inputobj=='ht_js_y'){
+					//加法第一位填空
+					htda=parseInt(document.getElementById('ht_js_jg').innerText) - parseInt(document.getElementById('ht_js_e').innerText);
+					//错误题添加到列表
+					list_cw=list_cw + ';<em>' + document.getElementById('ht_js_y').innerText + '</em> <i>[' + htda + ']</i> ' + document.getElementById('ht_js_fh').innerText + ' ' + document.getElementById('ht_js_e').innerText + ' = ' + document.getElementById('ht_js_jg').innerText;
+				}
+				else{
+					//加法第二位填空
+					htda=parseInt(document.getElementById('ht_js_jg').innerText) - parseInt(document.getElementById('ht_js_y').innerText);
+					//错误题添加到列表
+					list_cw=list_cw + ';' + document.getElementById('ht_js_y').innerText + ' ' + document.getElementById('ht_js_fh').innerText + ' <em>' + document.getElementById('ht_js_e').innerText + '</em> <i>[' + htda + ']</i> = ' + document.getElementById('ht_js_jg').innerText;
+				
+				}
+				//统计错误
+				document.getElementById('ht_cw').innerText=parseInt(document.getElementById('ht_cw').innerText)+1;
+			}
+		}
+		else{
+			//-
+			if (parseInt(document.getElementById('ht_js_y').innerText) - parseInt(document.getElementById('ht_js_e').innerText) == parseInt(document.getElementById('ht_js_jg').innerText)){
+				//统计正确
+				document.getElementById('ht_zq').innerText=parseInt(document.getElementById('ht_zq').innerText)+1;
+			}
+			else{
+				//计算错误，添加到列表
+				if (inputobj=='ht_js_y'){
+					//减法第一位填空
+					htda=parseInt(document.getElementById('ht_js_jg').innerText) + parseInt(document.getElementById('ht_js_e').innerText);
+					//错误题添加到列表
+					list_cw=list_cw + ';<em>' + document.getElementById('ht_js_y').innerText + '</em> <i>[' + htda + ']</i> ' + document.getElementById('ht_js_fh').innerText + ' ' + document.getElementById('ht_js_e').innerText + ' = ' + document.getElementById('ht_js_jg').innerText;
+				}
+				else{
+					//减法第二位填空
+					htda=parseInt(document.getElementById('ht_js_y').innerText) - parseInt(document.getElementById('ht_js_jg').innerText);
+					//错误题添加到列表
+					list_cw=list_cw + ';' + document.getElementById('ht_js_y').innerText + ' ' + document.getElementById('ht_js_fh').innerText + ' <em>' + document.getElementById('ht_js_e').innerText + '</em> <i>[' + htda + ']</i> = ' + document.getElementById('ht_js_jg').innerText;
+				}
+				//统计错误
+				document.getElementById('ht_cw').innerText=parseInt(document.getElementById('ht_cw').innerText)+1;
+			}
+		}
+		//生成随机题
+		random_tk();
+	}
+	else if (parseInt(ht_tm)>=0 && parseInt(ht_tm)<=6){
+		//10-20加减法		
+		if (document.getElementById('ht_js_fh').innerText=='+'){
+			//+
+			if (parseInt(document.getElementById('ht_js_y').innerText) + parseInt(document.getElementById('ht_js_e').innerText) == parseInt(document.getElementById('ht_js_jg').innerText)){
+				//统计正确
+				document.getElementById('ht_zq').innerText=parseInt(document.getElementById('ht_zq').innerText)+1;
+			}
+			else{
+				//计算错误，添加到列表
+				//计算正确答案
+				var htda=parseInt(document.getElementById('ht_js_y').innerText) + parseInt(document.getElementById('ht_js_e').innerText);
+				//添加到错误列表
+				list_cw=list_cw + ';' + document.getElementById('ht_js_y').innerText + ' ' + document.getElementById('ht_js_fh').innerText + ' ' + document.getElementById('ht_js_e').innerText + ' = <em>' + document.getElementById('ht_js_jg').innerText + '</em> <i>[' + htda + ']</i>';
+				//统计错误
+				document.getElementById('ht_cw').innerText=parseInt(document.getElementById('ht_cw').innerText)+1;	
+			}
+		}
+		else{
+			//-
+			if (parseInt(document.getElementById('ht_js_y').innerText) - parseInt(document.getElementById('ht_js_e').innerText) == parseInt(document.getElementById('ht_js_jg').innerText)){
+				//统计正确
+				document.getElementById('ht_zq').innerText=parseInt(document.getElementById('ht_zq').innerText)+1;
+			}
+			else{
+				//计算错误，添加到列表
+				//计算正确答案
+				var htda=parseInt(document.getElementById('ht_js_y').innerText) - parseInt(document.getElementById('ht_js_e').innerText);
+				//添加到错误列表			
+				list_cw=list_cw + ';' + document.getElementById('ht_js_y').innerText + ' ' + document.getElementById('ht_js_fh').innerText + ' ' + document.getElementById('ht_js_e').innerText + ' = <em>' + document.getElementById('ht_js_jg').innerText + '</em> <i>[' + htda + ']</i>';
+				//统计错误
+				document.getElementById('ht_cw').innerText=parseInt(document.getElementById('ht_cw').innerText)+1;	
+			}	
+		}
+		//生成随机题
+		random_kks('-1');
+	}
+}
+
+
+
+
+
+
+
+
+</script>
+<!--数字按键-->
+<audio id="yp_an" autobuffer="autobuffer" style="display:none;"><source src="data:audio/mp3;base64,SUQzAwAAAAAANVRMRU4AAAANQAAAMDAwMDAwMDAwMTIwVERBVAAAAAUAAAAxMjAzVElNRQAAAAUAAAAxNDU3//vgQAAACrVfyeU94Aq7q/k8p7wBXd2ZXdj9gAO7syu7H7AAtqKBSdfbULmjz8JwjDfQ9RyIedbP/mHfv398PFYrJjnEMHA6Y1HZOKCqGKCr9/Hw8ThCzLjJw0FBMpyDg5BwOJzlzc2BDFA57gPJmND1s/BNxxrbAoGTL+yvneMkpzk7MuMf5bydnW+L4LYWBdi2EIVEr+PSmXjyms3vt4r3OR5VPk7QtEBqxc1XAZKsbPZXq+Ph4rGSKnycFwVGWNXv94ve+6PHkSGrGTV74gRNUp/e9/73+KUpq7x4yH///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////bUUCk6+2oXNHn4ThGG+h6jkQ862f/MO/fv74eKxWTHOIYOB0xqOycUFUMUFX7+Ph4nCFmXGThoKCZTkHByDgcTnLm5sCGKBz3AeTMaHrZ+CbjjW2BQMmX9lfO8ZJTnJ2ZcY/y3k7Ot8XwWwsC7FsIQqJX8elMvHlNZvfbxXucjyqfJ2haIDVi5quAyVY2eyvV8fDxWMkVPk4LgqMsavf7xe990ePIkNWMmr3xAiapT+97/3v8UpTV3jxkPZBQkgiIiEkEjrbvrv/PASctXMrD0hEnRhTpsfxKx1jjNI1B5PouyLNPMMAndkEfd8LhKNLvGVFZrLGceGz85qwhogHrRcx8bVcie9tI8brw3KoepICeN0jBgZzKMGDAOMJZzti/8GymUWsbrDC6bB4Kdyl7un7P7l7/w/Drsw88LsP+kqzt0aVTR1HElnOYWLfcIfmruVWX3KW0sI+jLGtyd96WzF7/P1u3u39vt2djliXRKU3LVmrKpuCG/jb0TU73dzPOnt0lj9cz5rnfnZRV+t2mrXe3O4Zco6+GGuZ2Ls/c+/KKT//+z/cL0XyDIKEkEREQkgkdbd9d/54CTlq5lYekIk6MKdNj+JWOscZpGoPJ9F2RZp5hgE7sgj7vhcJRpd4yorNZYzjw2fnNWENEA9aLmPjarkT3tpHjdeG5VD1JATxukYMDOZRgwYBxhLOdsX/g2Uyi1jdYYXTYPBTuUvd0/Z/cvf+H4ddmHnhdh/0lWdujSqaOo4ks5zCxb7hD81dyqy+5S2lhH0ZY1uTvvS2Yvf5+t292/t9uzscsS6JSm5as1ZVNwQ38beiane7uZ509uksfrmfNc787KKv1u01a7253DLlHXww1zOxdn7n35RSf//2f7hei+Q//vgQAAACYdW1VZjYADU6tqqzGwAHqWjU7z8ADPUtGp3n4AGUEUU40RKJZRSTacA+2bByFqomydpifpaFYqPzhFR50el4DgSpdbATICYUDDGRBpzczjbw4obIkMy0GMHBAQCtcjF04NQRNAyMYiPgoJkMac2W5ROoLCRIBGGjkPtGtNZhL9QPTU1DS4JGpCwlSlNJuUNT9LG+2LNneP8VoLPGIihj4MgKJQNOC7Lo1a/Glyzw5r/xhnUy/tXuTxd5nc7j/03713///hmApO/URvR6LWewz+qt7LLeGW8f5r+/3//7OOPP1S5x2cwtXcj3WEvaTSWaohR//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////6giinGiJRLKKSbTgH2zYOQtVE2TtMT9LQrFR+cIqPOj0vAcCVLrYCZATCgYYyINObmcbeHFDZEhmWgxg4ICAVrkYunBqCJoGRjER8FBMhjTmy3KJ1BYSJAIw0ch9o1prMJfqB6amoaXBI1IWEqUppNyhqfpY32xZs7x/itBZ4xEUMfBkBRKBpwXZdGrX40uWeHNf+MM6mX9q9yeLvM7ncf+m/eu///8MwFJ36iN6PRaz2Gf1VvZZbwy3j/Nf3+///Zxx5+qXOOzmFq7ke6wl7SaSzVEKCkm2243JJJMLoCXCNJKcDEMCALaCmUg/gHkICjR+mWTJ0FJMrcVmsEK/dIxqACy0Bnsb8BimvslchxnKae7qwrUJmTUvu01+Kui7qNpd1PZHotynK5rEHffRw3dpZy2+ztNtfl7OZPcfhyo/SRp1n1QSl1mpy2Hc3qa1H39VuZNTWJTymlUFS2AHm/dWNwzGYzTwa+VJfhmW3ZdYgJ5pbDUqo6zktdf27S2KkNQF27LZ63GYZmIeyry3leM3vyl2Vqel2rfLvcYd5uZjt6dXdYg6U3scptxZiAaKOV52w8sVs26r9RDGpg8TDbb/RiYn8YYh3KNFJNttxuSSSYXQEuEaSU4GIYEAW0FMpB/APIQFGj9MsmToKSZW4rNYIV+6RjUAFloDPY34DFNfZK5DjOU093VhWoTMmpfdpr8VdF3UbS7qeyPRblOVzWIO++jhu7Szlt9naba/L2cye4/DlR+kjTrPqglLrNTlsO5vU1qPv6rcyamsSnlNKoKlsAPN+6sbhmMxmng18qS/DMtuy6xATzS2GpVR1nJa6/t2lsVIagLt2Wz1uMwzMQ9lXlvK8ZvflLsrU9LtW+Xe4w7zczHb06u6xB0pvY5TbizEA0Ucrzth5YrZt1X6iGNTB4mG23+jExP4wxDuUa//vgQAAACSBo0esPe2zajRo9Ye9tnxmjOUe/DbPjNGco9+G2JSabcjckjbsiGjL900JlgXFMPA5bdl3F3kx5kdBFDFPhBiultNoKxSC3moGiYgcoCUyJYFihJcnh5j9kXb1lyzQlMuoaoRRL1SL1FniYpRGUsEtu2vHI/p1c6bl0byiSCKOnpypgCfJ09YVEam4a6UUJYP1YV0EuNURDhLWWWFC7n2OGs3YoseZr1usGrVPHYrN8GC2QoaHQtunOd9eNFfqdL+fwpHz7zxb7vdz1FhQWdZbna5gsKEw1K3wEbCiP1lxbWeExrTWmDiUB8qvENqvOhqsmsdTBHixP/////////////////////////////////////////////////////////////////////////////////////////////////yUmm3I3JI27Ihoy/dNCZYFxTDwOW3Zdxd5MeZHQRQxT4QYrpbTaCsUgt5qBomIHKAlMiWBYoSXJ4eY/ZF29Zcs0JTLqGqEUS9Ui9RZ4mKURlLBLbtrxyP6dXOm5dG8okgijp6cqYAnydPWFRGpuGulFCWD9WFdBLjVEQ4S1llhQu59jhrN2KLHma9brBq1Tx2KzfBgtkKGh0LbpznfXjRX6nS/n8KR8+88W+73c9RYUFnWW52uYLChMNSt8BGwoj9ZcW1nhMa01pg4lAfKrxDarzoarJrHUwR4sRWur0k0klBoh1h5cjPRor6VMFFF7H0ojRLqmlITxPl7gFvOESc0wAWOcQA2W5zN0YgA8DklJY4t49ZYzzVbMpCFk7PN8eiKJAwH4dqe6EsyjMpTGUxlLtsnbGj2hLSLZu/b+M8ZY79+ajEUil1+42yRdjTHUoq0opH8bm0t+6fGWXqR/n9fhxKSC4/ekciuzdPYhu/AcbnrkouS2Iw/Pw3Pv5Wtz8ju2sJa/dTOUOxapYnSxilncaeN4zOU5btX7MpfmHYnjTWr13lWVT0ManHbpJlrc2wmy3eMuS5DI4hOvay6Wyp2qd63eeuVS2dgWKSyHYYfiRRR3Fa6vSTSSUGiHWHlyM9GivpUwUUXsfSiNEuqaUhPE+XuAW84RJzTABY5xADZbnM3RiADwOSUlji3j1ljPNVsykIWTs83x6IokDAfh2p7oSzKMylMZTGUu2ydsaPaEtItm79v4zxljv35qMRSKXX7jbJF2NMdSirSikfxubS37p8ZZepH+f1+HEpILj96RyK7N09iG78BxueuSi5LYjD8/Dc+/la3PyO7awlr91M5Q7FqlidLGKWdxp43jM5Tlu1fsyl+YdieNNavXeVZVPQxqcdukmWtzbCbLd4y5LkMjiE69rLpbKnap3rd565VLZ2BYpLIdhh+JFFHc//vgQAAAC7Boy1H4e2jdDRlqPw9tGc2PK6e9jaM5seV097G0VpWYpJNuYl5WFpIdxNjtcefpwFtDldEhXTLZleTEnfhxiSGSFSWwFMaooGw64zcEATH05WCyqvx8G+mqa7Yxmb0MtZd13WGrtZUGqEKBvC3H3KrVC+fSp0lI4TRQlU43JO+hKZPMyoLkh0etT9LihLY/k0tJI6jmFuOU4VawxMszAzrleRKmaEKWFt4yP1whbA5wGuLPrMZsbcLLNXLcstLI7br2TzEZU61hjiqZaeRouYVcWu8Zl0+fOWGVqhxlU5zsvbGd9Gg1eXgWbD91lcuEJzWYDlp/CfT4ZW3///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9WlZikk25iXlYWkh3E2O1x5+nAW0OV0SFdMtmV5MSd+HGJIZIVJbAUxqigbDrjNwQBMfTlYLKq/Hwb6aprtjGZvQy1l3XdYau1lQaoQoG8LcfcqtUL59KnSUjhNFCVTjck76Epk8zKguSHR61P0uKEtj+TS0kjqOYW45ThVrDEyzMDOuV5EqZoQpYW3jI/XCFsDnAa4s+sxmxtwss1ctyy0sjtuvZPMRlTrWGOKplp5Gi5hVxa7xmXT585YZWqHGVTnOy9sZ30aDV5eBZsP3WVy4QnNZgOWn8J9PhlbS1EUiUU42m4SkkJDFyfaWwciGFzTBKFFU+T+QhCyeE8oaaWEcKQlZjqAfBkn2OAt86LTbPd+ciTSR4pc4DIb2gn5x0jPrMA6F0BYzK1URUEczPxwQB4Hxo8MCWmHRwwqXiwcgbDguk9osJ3uYLCx07LbBEXOa2QB0q6T18EaRSDdGvf2qGSyW8WE5+44cKGy2PAEDxX0TDfN1fiHMd6MtiQYVUVY5uyxjUMnsUMHWnSfFh2jMItgMHmSXetjgSCYvEMf+7LW0sBFT0t//qDBaiKRKKcbTcJSSEhi5PtLYORDC5pglCiqfJ/IQhZPCeUNNLCOFISsx1APgyT7HAW+dFptnu/ORJpI8UucBkN7QT846Rn1mAdC6AsZlaqIqCOZn44IA8D40eGBLTDo4YVLxYOQNhwXSe0WE73MFhY6dltgiLnNbIA6VdJ6+CNIpBujXv7VDJZLeLCc/ccOFDZbHgCB4r6Jhvm6vxDmO9GWxIMKqKsc3ZYxqGT2KGDrTpPiw7RmEWwGDzJLvWxwJBMXiGP/dlraWAip6W//1Bg//vgQAAACiFlUXH4e2jUrKouPw9tHXGjTaw97aOuNGm1h720JochMxI69qqpKBdXN4Zi0lsKTBPw1YC2g00C2AOBGpiEVlbH8Q/UKLQLaAhh4CJhbsQCLYGgjedoaeD3JXUv1v68sfxkCCjXIJceX38mFRosyhcGSKq0+z6hNqudNTh/jONzWdHyVRJJlO7oyZeQXNWNajnUhbCHkEMg31EyohUMF3agQ9jbi2RMqCrPasdjj5b3zgn4yg2nHqoU75DHBvV74yF0jFe+YTTSSyo0Wtn44ZV7VFfxHjG/kbVXZkkiavulO/0/xncCu9/7v/T/WqTdv/9X////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////k0OQmYkde1VUlAurm8MxaS2FJgn4asBbQaaBbAHAjUxCKytj+IfqFFoFtAQw8BEwt2IBFsDQRvO0NPB7krqX639eWP4yBBRrkEuPL7+TCo0WZQuDJFVafZ9Qm1XOmpw/xnG5rOj5Kokkynd0ZMvILmrGtRzqQthDyCGQb6iZUQqGC7tQIextxbImVBVntWOxx8t75wT8ZQbTj1UKd8hjg3q98ZC6RivfMJppJZUaLWz8cMq9qiv4jxjfyNqrsySRNX3Snf6f4zuBXe/93/p/rVJu3/+pS1klklJtJuugnW5BawdSu4ZCh0Rnf5/oczeFkJ1sKCEQBYMg6T2JAE+VJzjcZi4Hk1HcW9JkxPgvA5j3N881OkjsWlSwRTsamZWnfJUmYs4s6qsnHWNsavMtjgJxYW1O3v250ThUQFIhB4Qr2VB+QGJ5FnW8JxKF4ZD8UJdDTJKulpTwHFEx0cwoxTR8djl0yJxtSp0pI506eR3qgeoboupkIVpWixD9IUnSxBwjcCNBUksDmC0j0CAkqP9KMzxVKlPNi0yoppVrUtQa2vbb2R86XaQfoxXNr1ujT2keuC9WJHguLyHSPM+rLhS1klklJtJuugnW5BawdSu4ZCh0Rnf5/oczeFkJ1sKCEQBYMg6T2JAE+VJzjcZi4Hk1HcW9JkxPgvA5j3N881OkjsWlSwRTsamZWnfJUmYs4s6qsnHWNsavMtjgJxYW1O3v250ThUQFIhB4Qr2VB+QGJ5FnW8JxKF4ZD8UJdDTJKulpTwHFEx0cwoxTR8djl0yJxtSp0pI506eR3qgeoboupkIVpWixD9IUnSxBwjcCNBUksDmC0j0CAkqP9KMzxVKlPNi0yoppVrUtQa2vbb2R86XaQfoxXNr1ujT2keuC9WJHguLyHSPM+rLg//vgQAAADBNk0enve2rVbJo9Pe9tWYGQ76e9jaswMh3097G1bcjRJbcjjl5Ih/MQ3iXRlydK6iJ4txpE6LkrmMICEiS8QtxBhNiXNZcX43S8wm8R0CCYghSzGkIMlk6yxWotp0q0vpcWWK+SJBh6kcuRuhqQ1IuJ0n8aSinUpOTpZYsFWsqtTqhdG8LcQlxy9YTlOmIrotttpykFOE3gvh6VTh9ejErozccx1Q1ayxWJRTWupTlUM1n2mJXTsKdQ1l+N9ucnuoM3gvZEOVyHM1sWtBiwt/Nrf/2zqtbbgvYvwfpoqFWq2LvOGFWq1WvaQk8hydZdNgorv//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////tuRoktuRxy8kQ/mIbxLoy5OldRE8W40idFyVzGEBCRJeIW4gwmxLmsuL8bpeYTeI6BBMQQpZjSEGSydZYrUW06VaX0uLLFfJEgw9SOXI3Q1IakXE6T+NJRTqUnJ0ssWCrWVWp1QujeFuIS45esJynTEV0W2205SCnCbwXw9Kpw+vRiV0ZuOY6oatZYrEoprXUpyqGaz7TErp2FOoay/G+3OT3UGbwXsiHK5Dma2LWgxYW/m1v/7Z1WttwXsX4P00VCrVbF3nDCrVarXtISeQ5OsumwUV31pIgppW223j5HweZioUXEvxgmYdh1nAgjJHqJSTIjIpo7CVlwL2ah5HSW4uxhmgY5ikuIKOYdoupACflwPNKLTK+L8d50JdGqJOopIpEgFc8VqT45gpel3FRiVkNtiFh+Jcyw7bema2ZZaZaZaSl4TxPHgzNCMOohByNQ1CskFtANjElFUqlwzPEZ6uOUyZOw+5/WrW1bVaZghQ2F8TzrTKZMnWPxPVtWGl4nqtMpi8nOFaI+MTpDQ2F7kZ6dHJeLyc4XuRutMswBiyX1pIgppW223j5HweZioUXEvxgmYdh1nAgjJHqJSTIjIpo7CVlwL2ah5HSW4uxhmgY5ikuIKOYdoupACflwPNKLTK+L8d50JdGqJOopIpEgFc8VqT45gpel3FRiVkNtiFh+Jcyw7bema2ZZaZaZaSl4TxPHgzNCMOohByNQ1CskFtANjElFUqlwzPEZ6uOUyZOw+5/WrW1bVaZghQ2F8TzrTKZMnWPxPVtWGl4nqtMpi8nOFaI+MTpDQ2F7kZ6dHJeLyc4XuRutMswBiyU//vgQAAAD/wAS4AAAAmcgAlwAAABCoABLgAAACAAACXAAAAE////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////" /></audio>
+<!--下题按键-->
+<audio id="yp_xt" autobuffer="autobuffer" style="display:none;"><source src="data:audio/mp3;base64,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qqqqqqqqqqqqqqqqqqr/++JEAA/2YF85F2ngArWrV+rsPABAAAGkAAAAIAAANIAAAAQAEnMGmODMObENiYS7StBKA4d49OQImmhhHRmG/VDx4wBMzR0zRMxQMYwsoANADIN08VMaRbjlQ1lmhJ5DjSUUA5idHU5MJyk5LjOnTROllkTxpGk4tyHIczXYUNQ19Kwq17qExK6L7Wtb5ra1vmtYNfBexdYhPo2rQrW9Xr3ea1r7Qn1cPn0bcF6rY2ava6xCfV/ta3/9rf5rWvrWusWhPtYta3q9exsvXsXUJiV0XEJ9G3mC9t0FNyBTcgo4Kf0F6CuhDMhvQV8V2QwBWBm9ES02Ql3UALeuk4yZJqqesoRAw5sacDqRUqZ0/WeXsX2fK5XIdETxpIczNpyk5Jy5KU0TRUNE8W4nRLS7BHg1Q4nMnoXoOUypVaoVbFkVyee6xa1rf4ta3rV7F9a11iz59q0K1vV69tmta+0J9XFrW3mtbeta19rVr/i1rb9rW+avYvrWuvaE+1i1rer17bNa19oT6uLWtvMF7bEFdCFfCG+FHRQVKK+Edkd0F8F/I7/+KmIKaimZccnJca1VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV" /></audio>
+<!--完成提示-->
+<audio id="yp_wc" autobuffer="autobuffer" style="display:none;"><source src="data:audio/mp3;base64,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QiBRhqrl8BhRXN2b+dL3/9EQY6LsZB+IIyHk2dT////9MwAYsChCDkXIYMYSf/8/UXyKDNgCQA9FIgmmgf////rd6f2SmZpfuKKZHEufbtaNTUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVNDJjARABcKvs/S7S6hkGtIDUcMAT+3rcsAIiCTUmfCK9JtNv/cwGPBEIjfrd/1q0zAVs//NwxNMfK1aCXlZmUg4Wk6rUWRbO39bN/9MmByb3cZwN9QXZ//nuY/9NRuTAZDA0cmwsfIIXCfFllz/9bsbLIkOEDAIIA5KBQcGhvEMH2Xkl//rK3/bM/97l5tKRWptrVUxBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVUaCEleclCF42lu/qTnD/83LE3CGS+k2elypQmA0QLvD1yugmoxCnAdyG/kHLh5Tf9ZZTFDjnIee/1azMY8PdS9AZH////lurULwN/J/d/////Wbg3mEJCQMCoVG//9BFQJ0LhCcCAY//u9pH//p6lQmo0UABAVhfkwvPvs1rxkIwC4KzpJUQ/xKAGzsIGpDGjU0JPIWEbyszGE87sEZWYSNFvy/PP8tYuh+KXcp8qAreba+OhZEAO/TQCznK9/+Sgufa8Nj/83LEuBiSqo5fUogC6G5Vsargkwjkzea/8EHWvs4f+nt1HSfqmxs3Kv//43ttS/D6SUOBD7prefyllNamtVqamlP/9fX/8NmAEh2w6k689JzCkpHLa265aAwRkMLLzFgpaEphmJP85URcmHYIMBEDHyZlLu/v7r7mBJR7Amm28/P/+f7TFjqndcuwBIYzIvAww3SQSypONfcuLsNhp2k5k5SqDGSnCNpeEu60pYzEoi/s7///////83LE/0wMFkw1m9gA////6///2uORFHfh+3hzOWSicf+Ny+HIxYt5/+4jKoadqIv67MqjUu3ytVpYZlUak6rwG5JXLdVVLZmUtmagICagKlGb4zfVXq/9Xqr8ZvjN1VPX2//q+zcZj6q9XjdU/pezcZm6qnb/s3/0vjHVWBgImZvpf6l7Ns3VwwEMDsFXf8sDUFVgq4RHhE//EsGlA0eEp0SnVA1VTEFNRTMuOTkuNVVVVVVVVVX/83LEeBmKriT9wxgCVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVU=" /></audio>
+</body>
+</html>
